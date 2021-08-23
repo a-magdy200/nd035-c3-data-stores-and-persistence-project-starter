@@ -25,7 +25,8 @@ public class PetService {
             customer.setPets(newCustomerPets);
             customerRepository.save(customer);
         }
-        return petDTO;
+
+        return convertEntityToDTO(pet);
     }
     public  PetDTO findPetById(Long id) {
         Optional<Pet> pet = petRepository.findById(id);
@@ -54,8 +55,8 @@ public class PetService {
     }
     private static List<PetDTO> convertEntityListToDTO(List<Pet> pets) {
         List<PetDTO> petDTOS = new ArrayList<>();
-        for (int i = 0; i < pets.size(); i++) {
-            petDTOS.add(convertEntityToDTO(pets.get(i)));
+        for (Pet pet : pets) {
+            petDTOS.add(convertEntityToDTO(pet));
         }
         return petDTOS;
     }
